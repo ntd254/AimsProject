@@ -34,9 +34,4 @@ public class Track implements Playable {
 	public void seeDetail() {
 		System.out.println("Track title: " + this.getTitle() + " - Track length: " + this.getLength());
 	}
-	
-	public boolean equals(Object obj) {
-		Track track = (Track)obj;
-		return (this.length == track.length && this.title == track.title);
-	}
 }

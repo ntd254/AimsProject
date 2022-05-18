@@ -67,10 +67,6 @@ public abstract class Media {
 		return false;
 	}
 	
-	public boolean equals(Object obj) {
-		return this.id == ((Media)obj).id;
-	}
-	
 	public Media() {
 		// TODO Auto-generated constructor stub
 	}
