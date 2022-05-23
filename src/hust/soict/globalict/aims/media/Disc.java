@@ -1,6 +1,6 @@
 package hust.soict.globalict.aims.media;
 
-public class Disc extends Media {
+public abstract class Disc extends Media {
 	public Disc(int length, String director) {
 		// TODO Auto-generated constructor stub
 		this.length = length;

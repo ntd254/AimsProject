@@ -18,7 +18,7 @@ public class Aims {
 		MemoryDaemon memoryDaemonObj = new MemoryDaemon();
 		Thread thread = new Thread(memoryDaemonObj);
 		thread.setDaemon(true);
-		thread.start();
+//		thread.start();
 		Store store = new Store();
 		Cart cart = new Cart();
 		Scanner input = new Scanner(System.in);
@@ -40,11 +40,10 @@ public class Aims {
 		CompactDisc cd2 = new CompactDisc("Thai", "music", "viet", 2.5f, "thi", track1, track2);
 		CompactDisc cd3 = new CompactDisc("Tuan", "music", "viet", 2.5f, "thi", track1, track2);
 		cd3.addTrack(track3);
-		cd2.removeTrack(track1);
 		book1.addAuthor("viet", "thai");
 		book2.removeAuthor("thi");
 		store.addMedia(dvd1, dvd2, dvd3, book1, book2, book3, cd1, cd2, cd3, dvd4);
-//		cart.addMedia(dvd1, dvd2, dvd3, book1, book2, book3, cd1, cd2, cd3);
+		cart.addMedia(dvd1, dvd2, dvd3, book1, book2, book3, cd1, cd2, cd3);
 		while (runShowMenu) {
 			showMenu();
 			runStoreMenu = true;
@@ -137,6 +136,7 @@ public class Aims {
 							case 3:
 								while (runCartMenu) {
 									cart.print();
+//				                    cart.printCart();
 									cartMenu();
 									choice = Integer.parseInt(input.nextLine());
 									switch (choice) {
@@ -156,8 +156,12 @@ public class Aims {
 									case 2:
 										System.out.println("You want to sort by cost or by title: (cost/title)");
 										if (input.nextLine().equals("cost")) {
-											cart.sortByCost();
-										}else cart.sortByTitle();
+											cart.sortByCostTitle();
+											cart.printCart();
+										}else {
+											cart.sortByTitleCost();
+											cart.printCart();
+										}
 										break;
 									case 3:
 										System.out.println("Enter the id");
@@ -180,6 +184,10 @@ public class Aims {
 										else if (media instanceof CompactDisc) ((CompactDisc)media).play();
 										else if (media instanceof DigitalVideoDisc) ((DigitalVideoDisc)media).play();
 										else if (media instanceof Book) System.out.println("Cannot play book");
+										break;
+									case 7: 
+										cart.sortByTitleAndCategory();
+										cart.printCart();
 										break;
 									default:
 										break;
@@ -276,8 +284,12 @@ public class Aims {
 						case 2:
 							System.out.println("You want to sort by cost or by title: (cost/title)");
 							if (input.nextLine().equals("cost")) {
-								cart.sortByCost();
-							}else cart.sortByTitle();
+								cart.sortByCostTitle();
+								cart.printCart();
+							}else {
+								cart.sortByTitleCost();
+								cart.printCart();
+							}
 							break;
 						case 3:
 							System.out.println("Enter the id");
@@ -300,6 +312,10 @@ public class Aims {
 							else if (media instanceof CompactDisc) ((CompactDisc)media).play();
 							else if (media instanceof DigitalVideoDisc) ((DigitalVideoDisc)media).play();
 							else if (media instanceof Book) System.out.println("Cannot play book");
+							break;
+						case 7: 
+							cart.sortByTitleAndCategory();
+							cart.printCart();
 							break;
 						default:
 							break;
@@ -344,6 +360,7 @@ public class Aims {
 		System.out.println("4. Get a lucky item from cart");
 		System.out.println("5. Place order");
 		System.out.println("6. Play media");
+		System.out.println("7. Sort by title and category");
 		System.out.println("0. Back");
 		System.out.println("--------------------------------");
 		System.out.println("Please choose a number: 0-1-2-3-4-5");

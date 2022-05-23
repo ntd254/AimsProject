@@ -1,12 +1,16 @@
 package hust.soict.globalict.aims.media;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.TreeMap;
 
 
 public class Book extends Media {
 	private String content;
 	private List<String> authors = new ArrayList<String>(); 
+	private ArrayList<String> contentTokens = new ArrayList<>();
+	private TreeMap<String, Integer> wordFrequency = new TreeMap<>();
 	public Book(String title, String category,String content,  float cost, String ... authors) {
 		// TODO Auto-generated constructor stub
 		super(title, category, cost);
@@ -14,12 +18,14 @@ public class Book extends Media {
 		for (int i = 0; i < authors.length; i++) {
 			this.authors.add(authors[i]);
 		}
+		processContent();
 	}
 	public Book(String title, String category,String content,  float cost, List<String> authors) {
 		// TODO Auto-generated constructor stub
 		super(title, category, cost);
 		this.content = content;
 		this.authors = authors;
+		processContent();
 	}
 	public String getContent() {
 		return this.content;
@@ -57,6 +63,28 @@ public class Book extends Media {
 			removeAuthor(authorNames[i]);
 		}
 	}
+	
+	public String toString() {
+		String message = "";
+		message = String.format("ID: %d   Book: %s   Category: %s   Cost: %f     Tokens length: %d      Content: %s\n", this.getId(), this.getTitle(), this.getCategory(), this.getCost(), this.contentTokens.size(), this.content);
+		message += "frequency: \n";
+		for (String key : wordFrequency.keySet()) {
+			message += String.format(key + ": %d       ", wordFrequency.get(key));
+		}
+		return message;
+	}
+	
+	public void processContent() {
+		String[] tokens = this.content.split(" ");
+		Collections.addAll(contentTokens, tokens);
+		Collections.sort(contentTokens);
+		for (String token: contentTokens) {
+			Integer frequency = this.wordFrequency.get(token);
+			frequency = (frequency == null) ? 1 : ++frequency;
+			this.wordFrequency.put(token, frequency);
+		}
+	}
+	
 	public void seeDetail() {
 		System.out.print(String.format("ID: %d   Book: %s   Category: %s   Cost: %f   Authors: ", this.getId(), this.getTitle(), this.getCategory(), this.getCost()));
 		for (int i = 0; i < this.authors.size(); i++) {

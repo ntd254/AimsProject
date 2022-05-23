@@ -24,9 +24,9 @@ public class CartTest {
 		// Test search methods
 		cart.searchById(3);
 		cart.searchById(0);
-		cart.sortByTitle();
+		cart.sortByTitleCost();
 		
-		cart.sortByCost();
+		cart.sortByCostTitle();
 		
 	}
 

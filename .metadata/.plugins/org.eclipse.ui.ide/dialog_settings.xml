@@ -5,5 +5,8 @@
 		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\Dat\Desktop\OOLT.ICT.20212.20194739.NguyenThanhDat-main\OOLT.ICT.20212.20194739.NguyenThanhDat-main\AimsProject"/>
+		</list>
 	</section>
 </section>

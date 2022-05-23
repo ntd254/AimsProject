@@ -31,17 +31,10 @@ public class CompactDisc extends Disc implements Playable{
 	}
 	
 	public void addTrack(Track ... tracks) {
-		boolean found = false;
 		for (int i = 0; i < tracks.length; i++) {
-			found = false;
-			for (int j = 0; j < this.tracks.size(); j++) {
-				if (this.tracks.get(j).isSame(tracks[i])) {
-					System.out.println("Track " + tracks[i].getTitle() + " has been added before");
-					found = true;
-					break;
-				}
-			}
-			if (!found) {
+			if (this.tracks.contains(tracks[i])) {
+				System.out.println("Track " + tracks[i].getTitle() + " has been added before");
+			}else {
 				this.tracks.add(tracks[i]);
 				System.out.println("Track " + tracks[i].getTitle() + " added successfully");
 			}
@@ -49,19 +42,12 @@ public class CompactDisc extends Disc implements Playable{
 	}
 	
 	public void removeTrack(Track ... tracks) {
-		boolean found = false;
 		for (int i = 0; i < tracks.length; i++) {
-			found = false;
-			for (int j = 0; j < this.tracks.size(); j++) {
-				if (this.tracks.get(j).isSame(tracks[i])) {
-					this.tracks.remove(j);
-					System.out.println("Track " + tracks[i].getTitle() + " removed successfully");
-					found = true;
-					break;
-				}
-			}
-			if (!found) {
+			if (!this.tracks.contains(tracks[i])) {
 				System.out.println("Cannot find track " + tracks[i].getTitle());
+			}else {
+				this.tracks.remove(i);
+				System.out.println("Track " + tracks[i].getTitle() + " removed successfully");
 			}
 		}
 	}
@@ -86,5 +72,11 @@ public class CompactDisc extends Disc implements Playable{
 		for (int i = 0; i < this.tracks.size();i++) {
 			this.tracks.get(i).seeDetail();
 		}
+	}
+	
+	public String toString() {
+		String message = "";
+		message = String.format("ID: %d CD - %s - %s - %s - %d: %f $",this.getId(), this.getTitle(), this.getCategory(), this.getDirector(), this.getLength(), this.getCost());
+		return message;
 	}
 }
